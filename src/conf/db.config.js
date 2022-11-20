@@ -1,5 +1,7 @@
 const { isProd } = require('../utils/env')
 
+const dotenv = require("dotenv")
+dotenv.config()
 
 let MYSQL_CONF = {
   host: 'localhost',
@@ -12,11 +14,11 @@ let MYSQL_CONF = {
 if (isProd) {
     MYSQL_CONF = {
         // 线上的 mysql 配置
-        host: 'localhost',
-        user: 'root',
-        password: 'Cty1212!',
-        port: '3306',
-        database: 'analysis'
+        host: process.env.db_host,
+        user: process.env.db_user,
+        password: process.env.db_password,
+        port: process.env.db_port,
+        database: process.env.db_database
     }
     
 }

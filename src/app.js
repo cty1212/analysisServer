@@ -11,7 +11,6 @@ const businessAnalysisRouter = require('./routes/businessAnalysis')
 const activityAnalysisRouter = require('./routes/activityAnalysis')
 const { accessLogger, koaLogger } = require('./logger/log4js')
 
-
 const onerrorConf = {
   redirect: '/error' //重定义到error
 }
