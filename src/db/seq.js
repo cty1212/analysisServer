@@ -8,9 +8,9 @@ const conf = {
     dialect: 'mysql'
 }
 
-const {  koaLogger } = require('../logger/log4js')
+// const {  koaLogger } = require('../logger/log4js')
 
-conf.logging = (...msg) => koaLogger.error(msg)
+conf.logging = (...msg) => console.log(msg)
 
 // 线上环境，使用连接池
 if (isProd) {

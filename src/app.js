@@ -7,6 +7,8 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const Moment = require('moment')
 const userAnalysisRouter = require('./routes/userAnalysis')
+const businessAnalysisRouter = require('./routes/businessAnalysis')
+const activityAnalysisRouter = require('./routes/activityAnalysis')
 const { accessLogger, koaLogger } = require('./logger/log4js')
 
 
@@ -43,6 +45,8 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(userAnalysisRouter.routes(), userAnalysisRouter.allowedMethods())
+app.use(businessAnalysisRouter.routes(), businessAnalysisRouter.allowedMethods())
+app.use(activityAnalysisRouter.routes(), activityAnalysisRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

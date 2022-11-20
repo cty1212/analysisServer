@@ -6,14 +6,14 @@ async function selectTop() {
     select 
     data_time,-- 当前数据日期
     reg_cust_qty_td num,-- 会员数
-    (reg_cust_qty_mtd - reg_cust_qty_mtd_tq)/reg_cust_qty_mtd_tq tb,-- 同比
-    (reg_cust_qty_mtd - reg_cust_qty_mtd_sq)/reg_cust_qty_mtd_sq hb -- 环比
+    concat(round((reg_cust_qty_mtd - reg_cust_qty_mtd_tq)/reg_cust_qty_mtd_tq * 100, 2), '%') tb,-- 同比
+    concat(round((reg_cust_qty_mtd - reg_cust_qty_mtd_sq)/reg_cust_qty_mtd_sq * 100, 2), '%') hb -- 环比
     from cdp_cust_mem_overview_stat_analyse order by data_time desc limit 1;
   `, { type: QueryTypes.SELECT, raw: true, plain: true });
 
   return info
 }
-
+// gm_avg * 100, 2), '%')
 async function selectTopOther() {
   const info = await seq.query(`
     select 
@@ -22,14 +22,14 @@ async function selectTopOther() {
     sum(buy_cust_qty_td) gm_sum,-- 购买人数
     sum(once_buy_cust_qty_td) dg_sum,-- 单次购次人数
     sum(rebuy_cust_qty_td) fg_sum,-- 复购人数
-    sum(reg_cust_qty_mtd - reg_cust_qty_mtd_tq) / sum(reg_cust_qty_mtd_tq) zc_tb,-- 注册同比
-    sum(reg_cust_qty_mtd -  reg_cust_qty_mtd_sq) / sum(reg_cust_qty_mtd_sq) zc_hb,-- 注册环比
-    sum(buy_cust_qty_mtd - buy_cust_qty_mtd_tq) / sum(buy_cust_qty_mtd_tq) gm_tb,-- 购买同比
-    sum(buy_cust_qty_mtd -  buy_cust_qty_mtd_sq) / sum(buy_cust_qty_mtd_sq) gm_hb,-- 购买环比
-    sum(once_buy_cust_qty_mtd - once_buy_cust_qty_mtd_tq) / sum(once_buy_cust_qty_mtd_tq) dg_tb,-- 单次购买同比
-    sum(once_buy_cust_qty_mtd -  once_buy_cust_qty_mtd_sq) / sum(once_buy_cust_qty_mtd_sq) dg_hb, -- 单次购买环比
-    sum(rebuy_cust_qty_mtd - rebuy_cust_qty_mtd_tq) / sum(rebuy_cust_qty_mtd_tq) fg_tb,-- 复购同比
-    sum(rebuy_cust_qty_mtd -  rebuy_cust_qty_mtd_sq) / sum(rebuy_cust_qty_mtd_sq) fg_hb-- 复购环比
+    concat(round(sum(reg_cust_qty_mtd - reg_cust_qty_mtd_tq) / sum(reg_cust_qty_mtd_tq) * 100, 2), '%') zc_tb,-- 注册同比
+    concat(round(sum(reg_cust_qty_mtd -  reg_cust_qty_mtd_sq) / sum(reg_cust_qty_mtd_sq) * 100, 2), '%') zc_hb,-- 注册环比
+    concat(round(sum(buy_cust_qty_mtd - buy_cust_qty_mtd_tq) / sum(buy_cust_qty_mtd_tq) * 100, 2), '%') gm_tb,-- 购买同比
+    concat(round(sum(buy_cust_qty_mtd -  buy_cust_qty_mtd_sq) / sum(buy_cust_qty_mtd_sq) * 100, 2), '%') gm_hb,-- 购买环比
+    concat(round(sum(once_buy_cust_qty_mtd - once_buy_cust_qty_mtd_tq) / sum(once_buy_cust_qty_mtd_tq) * 100, 2), '%') dg_tb,-- 单次购买同比
+    concat(round(sum(once_buy_cust_qty_mtd -  once_buy_cust_qty_mtd_sq) / sum(once_buy_cust_qty_mtd_sq) * 100, 2), '%') dg_hb, -- 单次购买环比
+    concat(round(sum(rebuy_cust_qty_mtd - rebuy_cust_qty_mtd_tq) / sum(rebuy_cust_qty_mtd_tq) * 100, 2), '%') fg_tb,-- 复购同比
+    concat(round(sum(rebuy_cust_qty_mtd -  rebuy_cust_qty_mtd_sq) / sum(rebuy_cust_qty_mtd_sq) * 100, 2), '%') fg_hb-- 复购环比
     from cdp_cust_overview_stat_analyse group by data_time order by data_time desc limit 1;-- 注册用户量，购买用户量，单购客户量，复购客户量
     -- 人数上面要用分割符，每千位分一次
   `, { type: QueryTypes.SELECT, raw: true, plain: true });
@@ -58,11 +58,11 @@ async function selectRegistered() {
     data_time,
     hsh_cust_qty_td hsh,-- 皇上皇会员数量
     fxry_cust_qty_td fxsh,-- 风行乳业会员数量
-    yuexiuhui_cust_qty_td yxiuh,-- 悦秀会会员数量
-    yuexianghui_cust_qty_td yxiaoh,-- 悦享会会员数量
-    yuexianghui2_cust_qty_td yxiaohui, -- 悦享汇会员数量
-    fangbao_cust_qty_td hysc,-- 越秀房宝会员数量
-    xinyu_cust_qty_td-- 越秀星寓会员数量
+    yuexiuhui_cust_qty_td yxdc,-- 越秀地产会员数量
+    yuexianghui_cust_qty_td yxwy,-- 越秀物业会员数量
+    yuexianghui2_cust_qty_td yxjt, -- 越秀集团会员数量
+    fangbao_cust_qty_td yxst,-- 越秀商投会员数量
+    xinyu_cust_qty_td zydb-- 置业担保会员数量
     from cdp_cust_mem_overview_stat_analyse 
     order by data_time desc limit 1;
   `, { type: QueryTypes.SELECT, raw: true, plain: true });

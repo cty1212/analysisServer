@@ -1,5 +1,6 @@
 function percent(num) {
-  return String((Number(num) * 100).toFixed(2)) + '%'
+  return String((Math.round(num * 10000) / 100)) + '%'
+  // return num
 }
 
 function toThousand(num) {
@@ -11,12 +12,27 @@ function intiPieData(info, name, nameKeys) {
   Object.keys(info).forEach(item => {
     if(nameKeys.includes(item)) {
       const index = nameKeys.findIndex(child => child === item)
-      arr.push(
-        {
-          value: info[item],
-          name: name[index]
-        }
-      )
+      const obj = {
+        value: info[item],
+        name: name[index]
+      }
+      arr.push(obj)
+    }
+  })
+  return arr
+}
+
+function intiBsAnAc(info, name, nameKeys) {
+  const arr = []
+  Object.keys(info).forEach(item => {
+    if(nameKeys.includes(item)) {
+      const index = nameKeys.findIndex(child => child === item)
+      const obj = {
+        value: info[item],
+        name: name[index],
+        key: item
+      }
+      arr.push(obj)
     }
   })
   return arr
@@ -25,5 +41,6 @@ function intiPieData(info, name, nameKeys) {
 module.exports = {
   percent,
   toThousand,
-  intiPieData
+  intiPieData,
+  intiBsAnAc
 }

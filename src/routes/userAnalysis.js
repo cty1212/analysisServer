@@ -11,31 +11,31 @@ const {
 
 router.prefix('/api/userAnalysis')
 
-router.get('/getTopList',  async (ctx, next) => {
+router.get('/topList',  async (ctx, next) => {
   ctx.body = await getTopList(ctx)
 })
 
-router.get('/getVipLevel',  async (ctx, next) => {
+router.get('/vipLevel',  async (ctx, next) => {
   ctx.body = await getVipLevel(ctx)
 })
 
-router.get('/getRegistered',  async (ctx, next) => {
+router.get('/registered',  async (ctx, next) => {
   ctx.body = await getRegistered(ctx)
 })
 
-router.get('/getRegisteredUsers',  async (ctx, next) => {
+router.get('/registeredUsers',  async (ctx, next) => {
   ctx.body = await getRegisteredUsers(ctx)
 })
 
-router.get('/getRegisteredSource',  async (ctx, next) => {
+router.get('/registeredSource',  async (ctx, next) => {
   ctx.body = await getRegisteredSource(ctx)
 })
 
-router.get('/getUserLife',  async (ctx, next) => {
+router.get('/userLife',  async (ctx, next) => {
   ctx.body = await getUserLife(ctx)
 })
 
-router.get('/getBuyAgain',  async (ctx, next) => {
+router.get('/buyAgain',  async (ctx, next) => {
   ctx.body = await getBuyAgain(ctx)
 })
 
