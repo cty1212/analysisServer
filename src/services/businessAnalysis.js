@@ -1,5 +1,5 @@
 const seq = require('../db/seq')
-const { QueryTypes } = require('../db/seq');
+const { QueryTypes } = require('../db/seq')
 
 // TRUNCATE(yh_cnt/10000, 4)
 // CONVERT(yh_cnt/10000, DECIMAL(15,2))
@@ -18,7 +18,7 @@ async function selectFxOnline() {
     round(fg_cnt/10000, 2) fg_cnt,-- 复购人数
     concat(round(fg_avg * 100, 2), '%') fg_avg-- 复购率
     from h5_fx_online
-  `, { type: QueryTypes.SELECT, raw: true});
+  `, { type: QueryTypes.SELECT, raw: true })
 
   return info
 }
@@ -32,11 +32,10 @@ async function selectFxOffline() {
     jy_sum,-- 订单金额
     round(jy_avg, 2) jy_avg-- 单均价（元）
     from h5_fx_offline;
-  `, { type: QueryTypes.SELECT, raw: true, plain: true});
+  `, { type: QueryTypes.SELECT, raw: true, plain: true })
 
   return info
 }
-
 
 async function selectHshOnline() {
   const info = await seq.query(`
@@ -51,11 +50,10 @@ async function selectHshOnline() {
     round(fg_cnt/10000, 2) fg_cnt, -- 复购人数
     concat(round(fg_avg * 100, 2), '%') fg_avg-- 复购率
     from h5_hsh_online;
-  `, { type: QueryTypes.SELECT, raw: true});
+  `, { type: QueryTypes.SELECT, raw: true })
 
   return info
 }
-
 
 async function selectHshOffline() {
   const info = await seq.query(`
@@ -66,7 +64,7 @@ async function selectHshOffline() {
     jy_sum,-- 订单金额
     round(jy_avg, 2) jy_avg-- 单均价（元）
     from h5_hsh_offline;
-  `, { type: QueryTypes.SELECT, raw: true, plain: true});
+  `, { type: QueryTypes.SELECT, raw: true, plain: true })
 
   return info
 }

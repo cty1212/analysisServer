@@ -1,5 +1,5 @@
 const seq = require('../db/seq')
-const { QueryTypes } = require('../db/seq');
+const { QueryTypes } = require('../db/seq')
 
 async function selectTop() {
   const info = await seq.query(`
@@ -9,7 +9,7 @@ async function selectTop() {
     concat(round((reg_cust_qty_mtd - reg_cust_qty_mtd_tq)/reg_cust_qty_mtd_tq * 100, 2), '%') tb,-- 同比
     concat(round((reg_cust_qty_mtd - reg_cust_qty_mtd_sq)/reg_cust_qty_mtd_sq * 100, 2), '%') hb -- 环比
     from cdp_cust_mem_overview_stat_analyse order by data_time desc limit 1;
-  `, { type: QueryTypes.SELECT, raw: true, plain: true });
+  `, { type: QueryTypes.SELECT, raw: true, plain: true })
 
   return info
 }
@@ -32,7 +32,7 @@ async function selectTopOther() {
     concat(round(sum(rebuy_cust_qty_mtd -  rebuy_cust_qty_mtd_sq) / sum(rebuy_cust_qty_mtd_sq) * 100, 2), '%') fg_hb-- 复购环比
     from cdp_cust_overview_stat_analyse group by data_time order by data_time desc limit 1;-- 注册用户量，购买用户量，单购客户量，复购客户量
     -- 人数上面要用分割符，每千位分一次
-  `, { type: QueryTypes.SELECT, raw: true, plain: true });
+  `, { type: QueryTypes.SELECT, raw: true, plain: true })
 
   return info
 }
@@ -47,7 +47,7 @@ async function selectVipLevel() {
     v2_cust_qty_td yyhy-- 优悦会员
     from cdp_cust_mem_overview_stat_analyse
     order by data_time desc limit 1;
-  `, { type: QueryTypes.SELECT, raw: true, plain: true });
+  `, { type: QueryTypes.SELECT, raw: true, plain: true })
 
   return info
 }
@@ -65,14 +65,12 @@ async function selectRegistered() {
     xinyu_cust_qty_td zydb-- 置业担保会员数量
     from cdp_cust_mem_overview_stat_analyse 
     order by data_time desc limit 1;
-  `, { type: QueryTypes.SELECT, raw: true, plain: true });
+  `, { type: QueryTypes.SELECT, raw: true, plain: true })
 
   return info
 }
 
-
 async function selectSex() {
-  
   const info = await seq.query(`
     select 
     data_time,-- 数据日期
@@ -81,8 +79,8 @@ async function selectSex() {
     max(other_gender_cust_qty_td) other-- 其它性别用户数量
     from cdp_cust_overview_stat_analyse
     group by data_time order by data_time desc limit 1;
-    `, { type: QueryTypes.SELECT, raw: true, plain: true });
-    return info
+    `, { type: QueryTypes.SELECT, raw: true, plain: true })
+  return info
 }
 
 async function selectPlate() {
@@ -94,8 +92,8 @@ async function selectPlate() {
     from cdp_cust_overview_stat_analyse
     where data_time=(select data_time from cdp_cust_overview_stat_analyse order by data_time desc limit 1)
     group by data_time,reg_section;
-    `, { type: QueryTypes.SELECT, raw: true });
-    return info
+    `, { type: QueryTypes.SELECT, raw: true })
+  return info
 }
 
 async function selectAge() {
@@ -111,8 +109,8 @@ async function selectAge() {
     sum(unknown_cust_qty_td) unknownAge-- 未知年龄用户数量
     from cdp_cust_overview_stat_analyse
     group by data_time order by data_time desc limit 1;
-    `, { type: QueryTypes.SELECT, raw: true, plain: true });
-    return info
+    `, { type: QueryTypes.SELECT, raw: true, plain: true })
+  return info
 }
 
 async function selectRegisteredSource() {
@@ -124,8 +122,8 @@ async function selectRegisteredSource() {
     from cdp_cust_reg_source_stat_analyse
     where length(reg_source)>0  and
     data_time=(select data_time from cdp_cust_reg_source_stat_analyse order by data_time desc limit 1);
-    `, { type: QueryTypes.SELECT, raw: true});
-    return info
+    `, { type: QueryTypes.SELECT, raw: true })
+  return info
 }
 
 async function selectUserLife() {
@@ -155,12 +153,12 @@ async function selectUserLife() {
     from cdp_cust_life_cycle_stat_analyse
     where data_time=(select data_time from cdp_cust_life_cycle_stat_analyse order by data_time desc limit 1)) t
     group by data_time,company;
-    `, { type: QueryTypes.SELECT, raw: true});
-    return info
+    `, { type: QueryTypes.SELECT, raw: true })
+  return info
 }
 
 async function selectBuyAgain(startDate, endDate) {
-  console.log(startDate);
+  console.log(startDate)
   console.log(endDate)
   const info = await seq.query(`
     select
@@ -176,10 +174,9 @@ async function selectBuyAgain(startDate, endDate) {
     and data_time <= ${endDate}
     group by substr(data_time,1,7),created_company_name,order_type
     order by mon;
-    `, { type: QueryTypes.SELECT, raw: true});
-    return info
+    `, { type: QueryTypes.SELECT, raw: true })
+  return info
 }
-
 
 module.exports = {
   selectTop,

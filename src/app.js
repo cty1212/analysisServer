@@ -1,4 +1,5 @@
 const Koa = require('koa')
+
 const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
@@ -12,7 +13,7 @@ const activityAnalysisRouter = require('./routes/activityAnalysis')
 const { accessLogger, koaLogger } = require('./logger/log4js')
 
 const onerrorConf = {
-  redirect: '/error' //重定义到error
+  redirect: '/error' // 重定义到error
 }
 
 // error handler
@@ -20,7 +21,7 @@ onerror(app, onerrorConf)
 
 // middlewares
 app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
+  enableTypes: ['json', 'form', 'text']
 }))
 app.use(accessLogger())
 app.use(json())
@@ -28,9 +29,9 @@ app.use(logger((str) => {
   console.log(Moment().format('YYYY-MM-DD HH:mm:ss') + str)
   // koaLogger.error(str)
 }))
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(require('koa-static')(`${__dirname}/public`))
 
-app.use(views(__dirname + '/views', {
+app.use(views(`${__dirname}/views`, {
   extension: 'nunjucks'
 }))
 
@@ -48,11 +49,11 @@ app.use(businessAnalysisRouter.routes(), businessAnalysisRouter.allowedMethods()
 app.use(activityAnalysisRouter.routes(), activityAnalysisRouter.allowedMethods())
 
 // error-handling
-app.on('error', (err, ctx) => {
+app.on('error', (err) => {
   koaLogger.error(err)
 })
 // app.on('error-info', (err, ctx) => {
-// 	log4js.logInfo(err)
+// log4js.logInfo(err)
 // })
 
 module.exports = app

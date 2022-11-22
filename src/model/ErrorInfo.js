@@ -4,9 +4,9 @@
  */
 
 module.exports = {
-    // 用户名已存在
-    errorInfo: {
-        errno: 10001,
-        message: '查询失败'
-    },
+  // 用户名已存在
+  errorInfo: {
+    errno: 10001,
+    message: '查询失败'
+  }
 }

@@ -6,13 +6,12 @@ const {
 
 router.prefix('/api/activityAnalysis')
 
-router.get('/siYu',  async (ctx, next) => {
+router.get('/siYu', async (ctx) => {
   ctx.body = await getSiYu(ctx)
 })
 
-router.get('/qiWei',  async (ctx, next) => {
+router.get('/qiWei', async (ctx) => {
   ctx.body = await getQiWei(ctx)
 })
 
 module.exports = router
-
