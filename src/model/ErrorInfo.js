@@ -8,5 +8,9 @@ module.exports = {
   errorInfo: {
     errno: 10001,
     message: '查询失败'
+  },
+  errorLoginInfo: {
+    errno: 40001,
+    message: '登录失败'
   }
 }

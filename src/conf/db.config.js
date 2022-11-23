@@ -3,6 +3,8 @@ const { isProd } = require('../utils/env')
 
 dotenv.config()
 
+console.log(process.env.db_host)
+
 let MYSQL_CONF = {
   host: 'localhost',
   user: 'root',
