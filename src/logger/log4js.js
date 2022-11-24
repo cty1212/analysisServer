@@ -2,8 +2,8 @@ const path = require('path')
 const log4js = require('koa-log4')
 
 log4js.configure({
-  // pm2: true,
-  // pm2InstanceVar: 'isMaster',
+  pm2: true,
+  pm2InstanceVar: 'isMaster',
   appenders: {
     access: {
       type: 'dateFile',
