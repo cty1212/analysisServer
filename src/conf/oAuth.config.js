@@ -3,15 +3,16 @@ const { isProd } = require('../utils/env')
 
 dotenv.config()
 
+// 开发测试一套单点登录配置
 let oAuthConfig = {
   // accessToken请求地址
-  accessTokenUri: 'https://linksso-test.yuexiu.com/sso/oauth2/token',
+  accessTokenUri: process.env.qa_accessTokenUri,
   // 用户信息请求地址
-  userInfoUri: 'https://linksso-test.yuexiu.com/sso/oauth2/userinfo',
+  userInfoUri: process.env.qa_userInfoUri,
   grant_type: 'authorization_code',
   // 客户端相关标识，请从认证服务器申请
-  clientId: '9wLvi3Yy7AxwHHbUgRDmD',
-  client_secret: '7912a806-718b-4de4-927b-f25244e8d38b'
+  clientId: process.env.qa_CLIENT_ID,
+  client_secret: process.env.qa_CLIENT_SECRET
 }
 
 if (isProd) {

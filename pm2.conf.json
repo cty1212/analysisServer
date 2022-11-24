@@ -1,0 +1,19 @@
+{
+    "apps": {
+        "name": "analysis",
+        "script": "bin/www",
+        "watch": true,
+        "ignore_watch": [
+            "node_modules",
+            "logs",
+            "uploadFiles"
+        ],
+        "error_file": "./logs/err.log",
+        "out_file": "./logs/out.log",
+        "log_date_format": "YYYY-MM-DD HH:mm:ss",
+        "exec_mode": "cluster",
+        "instances": "max",
+        "max_memory_restart": "2G",
+        "autorestart": true 
+    }
+}

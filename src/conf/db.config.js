@@ -1,5 +1,5 @@
 const dotenv = require('dotenv')
-const { isProd } = require('../utils/env')
+const { isProd, isQa } = require('../utils/env')
 
 dotenv.config()
 
@@ -21,6 +21,17 @@ if (isProd) {
     password: process.env.db_password,
     port: process.env.db_port,
     database: process.env.db_database
+  }
+}
+
+if (isQa) {
+  MYSQL_CONF = {
+    // 线上的 mysql 配置
+    host: process.env.qa_db_host,
+    user: process.env.qa_db_user,
+    password: process.env.qa_db_password,
+    port: process.env.qa_db_port,
+    database: process.env.qa_db_database
   }
 }
 
