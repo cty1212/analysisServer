@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const { MYSQL_CONF } = require('../conf/db.config')
 const { isProd } = require('../utils/env')
+const { koaLogger } = require('../logger/log4js')
 
 const {
   host, user, password, database
@@ -12,7 +13,8 @@ const conf = {
 
 // const {  koaLogger } = require('../logger/log4js')
 
-conf.logging = (...msg) => console.log(msg)
+// conf.logging = (...msg) => console.log(msg)
+conf.logging = () => {}
 
 // 线上环境，使用连接池
 if (isProd) {
@@ -26,10 +28,11 @@ if (isProd) {
 const seq = new Sequelize(database, user, password, conf)
 
 seq.authenticate().then(() => {
-  console.log('connect success')
+  // console.log('connect success')
 }).catch((err) => {
-  console.log(err)
-  throw (err)
+  // console.log(err)
+  // throw (err)
+  koaLogger.error(err)
 })
 
 module.exports = seq

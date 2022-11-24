@@ -3,7 +3,7 @@ const { isProd, isQa } = require('../utils/env')
 
 dotenv.config()
 
-console.log(process.env.db_host)
+// console.log(process.env.db_host)
 
 let MYSQL_CONF = {
   host: 'localhost',

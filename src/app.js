@@ -6,7 +6,7 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-const Moment = require('moment')
+// const Moment = require('moment')
 const jwt = require('koa-jwt')
 const userAnalysisRouter = require('./routes/userAnalysis')
 const businessAnalysisRouter = require('./routes/businessAnalysis')
@@ -27,11 +27,12 @@ app.use(bodyparser({
 }))
 app.use(accessLogger())
 app.use(json())
-app.use(logger((str) => {
-  console.log(Moment().format('YYYY-MM-DD HH:mm:ss') + str)
+app.use(logger(() => {
+  // console.log(Moment().format('YYYY-MM-DD HH:mm:ss') + str)
   // koaLogger.error(str)
 }))
 app.use((ctx, next) => next().catch((err) => {
+  // console.log(err)
   if (err.status === 401) {
     ctx.status = 401
     ctx.body = {
@@ -50,12 +51,12 @@ app.use(views(`${__dirname}/views`, {
 }))
 
 // logger
-app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
+// app.use(async (ctx, next) => {
+//   const start = new Date()
+//   await next()
+//   const ms = new Date() - start
+//   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+// })
 
 // routes
 app.use(userAnalysisRouter.routes(), userAnalysisRouter.allowedMethods())

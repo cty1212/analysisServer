@@ -158,8 +158,8 @@ async function selectUserLife() {
 }
 
 async function selectBuyAgain(startDate, endDate) {
-  console.log(startDate)
-  console.log(endDate)
+  // console.log(startDate)
+  // console.log(endDate)
   const info = await seq.query(`
     select
     substr(data_time,1,7) mon,-- 月份
@@ -170,7 +170,7 @@ async function selectBuyAgain(startDate, endDate) {
     from cdp_cust_repurchase_stat_analyse
     where time='M' and substr(date_add(data_time,interval 1 day),9,10)='01'
     or data_time=(select data_time from cdp_cust_repurchase_stat_analyse order by data_time desc limit 1)
-    and data_time >= ${endDate}
+    and data_time >= ${startDate}
     and data_time <= ${endDate}
     group by substr(data_time,1,7),created_company_name,order_type
     order by mon;

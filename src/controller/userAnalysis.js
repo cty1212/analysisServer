@@ -179,7 +179,7 @@ async function getUserLife() {
 
 async function getBuyAgain(ctx) {
   try {
-    console.log(ctx.request.query)
+    // console.log(ctx.request.query)
     const months = ctx.request.query.months?.split(',')
     const startDate = Moment(months[0]).startOf('month').format('YYYY-MM-DD')
     const endDate = Moment(months[months.length - 1]).endOf('month').format('YYYY-MM-DD')

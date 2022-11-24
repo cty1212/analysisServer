@@ -31,7 +31,7 @@ router.post('/user/userInfo', async (ctx) => {
       method: 'get',
       url: `${oAuthConfig.userInfoUri}?access_token=${tokenInfo.access_token}`
     })
-    console.log(userInfo)
+    // console.log(userInfo)
     const token = jsonwebtoken.sign(userInfo, 'analysisServer', { expiresIn: '8h' })
     ctx.body = new SuccessModel({
       token,
@@ -39,7 +39,11 @@ router.post('/user/userInfo', async (ctx) => {
       userInfo
     })
   } catch (error) {
-    koaLogger.error(error)
+    // {
+    //   message: error.message,
+    //   url: error.config.url
+    // }
+    koaLogger.error(error.message)
     ctx.status = 500
     ctx.body = new ErrorModel(errorLoginInfo)
   }
