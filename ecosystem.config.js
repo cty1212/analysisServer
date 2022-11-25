@@ -13,7 +13,7 @@ module.exports = {
     out_file: 'logs/out.log',
     log_date_format: 'YYYY-MM-DD HH:mm:ss',
     exec_mode: 'cluster',
-    instances: 'max',
+    instances: 4,
     max_memory_restart: '2G',
     autorestart: true,
     instance_var: 'isMaster',
