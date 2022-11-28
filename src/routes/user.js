@@ -12,7 +12,7 @@ const {
 
 axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
 
-router.prefix('/api/')
+router.prefix('/api')
 
 router.post('/user/userInfo', async (ctx) => {
   const { code } = ctx.request.body
