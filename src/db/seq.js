@@ -4,10 +4,11 @@ const { isProd } = require('../utils/env')
 const { koaLogger } = require('../logger/log4js')
 
 const {
-  host, user, password, database
+  host, user, password, database, port
 } = MYSQL_CONF
 const conf = {
   host,
+  port,
   dialect: 'mysql'
 }
 
